@@ -1,0 +1,21 @@
+i'll give you 4 images at the images are question of a assessment you make out and give me in copyable code format like this Quesion 1    q: blhablh?   a: answer and this continue until 16
+
+eg:- 
+
+Question 1
+q: [Enter Question]
+a: [Enter Answer]
+
+Question 2
+q: [Enter Question]
+a: [Enter Answer]
+
+Question 3
+q: [Enter Question]
+a: [Enter Answer]
+
+Question 4
+q: [Enter Question]
+a: [Enter Answer]
+
+.... 16..
