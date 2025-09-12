@@ -1,0 +1,178 @@
+Project structure==================================================================================================================================
+
+django_1/
+├── src/
+│   └── django_1/  - where all things are newly coded
+│       ├── manage.py - this is instructor of all commands
+│       ├── db.sqlite3
+│       └── django_1/  - this is called app. where we all code
+│           ├── __init__.py  - for imorting and making it accessible or make it as a python dir
+│           ├── asgi.py  -  for connecting like asynchronous
+│           ├── settings.py - application related setting are here
+│           ├── urls.py  - for request sendin and more api related
+│           ├── wsgi.py  - same as asgi but little different
+│           └── __pycache__/
+│               ├── __init__.cpython-313.pyc
+│               ├── settings.cpython-313.pyc
+│               ├── urls.cpython-313.pyc
+│               └── wsgi.cpython-313.pyc
+│
+└── venv/
+    ├── Include/
+    ├── Lib/
+    │   └── site-packages/
+    ├── Scripts/
+    │   ├── activate
+    │   ├── activate.bat
+    │   ├── Activate.ps1
+    │   ├── deactivate.bat
+    │   ├── pip.exe
+    │   ├── python.exe
+    │   └── ... (other script files)
+    ├── .gitignore
+    └── pyvenv.cfg
+
+
+Explained version=============================================================================================================================
+
+django_1/  -- This is the main container for your entire project. It's just a folder and you can name it anything.
+│
+├── src/  -- Stands for "source." It's a convention to keep all your actual code inside this folder to keep the project organized.
+│   │
+│   └── django_1/  -- This is the folder created by the `startproject` command. It holds the core project files.
+│       │
+│       ├── manage.py  -- **Your project's command center.** This is a script you use to run all Django commands, like starting the server (`runserver`), creating database tables (`migrate`), or creating new apps (`startapp`)[7].
+│       │
+│       ├── db.sqlite3  -- **Your default database.** Django needs a database to store data (like user accounts, blog posts, etc.). By default, it creates this simple file-based database. For larger projects, you would switch this to something like PostgreSQL or MySQL.
+│       │
+│       └── django_1/  -- **The main Python package for your project.** This folder contains the site-wide configuration files. Its name is important because you'll use it to import things.
+│           │
+│           ├── __init__.py  -- **Tells Python this is a package.** It's an empty file that lets Python know that the `django_1` directory should be treated as a collection of modules (a package)[7].
+│           │
+│           ├── settings.py  -- **The project's main configuration file.** This is one of the most important files. It holds all your project settings: database configuration, installed apps, security keys, timezone, and much more[7][21].
+│           │
+│           ├── urls.py  -- **The project's "table of contents."** This file routes URLs to your Python code (your "views"). When a user visits a URL, Django checks this file to see which function to run[7].
+│           │
+│           ├── wsgi.py  -- **Entry-point for the web server.** WSGI (Web Server Gateway Interface) is a standard that allows web servers to communicate with your Python application. This file provides the "hook" that production web servers (like Gunicorn or Apache) use to run your app[15][18]. It handles standard, synchronous requests.
+│           │
+│           ├── asgi.py  -- **The modern entry-point for servers.** ASGI (Asynchronous Server Gateway Interface) is the successor to WSGI. It's needed to handle asynchronous features like WebSockets (for live chats, notifications, etc.). Even if you don't use these features, Django creates this file for compatibility with modern servers[17].
+│           │
+│           └── __pycache__/  -- **Cached Python files.** Python automatically creates this folder to store compiled versions of your code (`.pyc` files). This helps your application start and run slightly faster. You can safely ignore this folder.
+│
+└── venv/  -- **Your virtual environment.** This folder isolates your project's dependencies. The Python interpreter and all the packages you install (like Django itself) are stored here, separate from your system's global packages. This ensures your project always uses the correct versions of its libraries.
+
+
+
+
+
+
+#Setting.py file
+
+
+
+    BASE_DIR     = Path(__file__).resolve().parent.parent
+    --base dir means manage.py file's folder
+
+
+
+
+    SECRET_KEY = 'asjdf;asjdfassdf;sadfj'
+
+    --this is used by many thing anyway keep it secret
+
+
+
+    DEBUG = True
+    -- means it will display all errors -development_time = true | live_time = False
+
+
+
+
+    Allowed_host = []
+    -where it can be accessible for eg 127.0.0
+
+
+
+    INSTALLED_APPS = [
+        ---
+        --
+        --
+        ----
+        -- 
+        -there are so many apps needed for django that's are lsited here
+    ]
+
+
+
+    MIDDLE_WEAR = [
+        ---
+        ---
+        ---
+        ---
+        - we don't disccuss nwo
+    ]
+
+
+
+    Root_url_conf = 'django_1'
+    -when it is accessed where to go
+
+
+
+
+    Templates = [
+        ad-ad--accessedad-accessedada
+        ad-
+        -ad
+        -Templates related
+    ]
+
+
+    DATABASE = [
+        whihc data base to use in this app
+    ]
+
+
+
+
+
+
+
+
+    AUTH_PASS_VALIDATORS = [
+        pasword security related
+    ]
+ 
+    ..
+    ..
+    ..
+    .
+    .
+
+
+
+
+
+
+
+
+
+
+
+
+
+Urls.py File  
+
+
+
+    it is the request response handler
+
+
+
+    from django.contrib import admin  -importing adming module
+    from django.urls import path   - importing  path
+
+    urlpatterns = [
+        path('adming/, adming.site.urls),  -this is where we can add urls - we will learn later
+        -on path = adming then go to admin.sire.url
+    ]

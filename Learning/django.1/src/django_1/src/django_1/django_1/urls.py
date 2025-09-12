@@ -16,7 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http.response import HttpResponse
+
+#add two line break after importing
+
+
+
+def index(request): #needed for url construction err will happen -itneeds http response
+   # for the error import httpsresponse
+   return HttpResponse("<h1>Hello Fuck You</h1>")
+
+
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", index) # if empty then call index function needed for url construction
 ]

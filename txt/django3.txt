@@ -1,0 +1,9 @@
+To Create An App
+for cleaner coding a app is ineeded 
+
+
+got ot - cd Learning\django.1\src\django_1\src\django_1 eg
+
+create a app web named app  -- python manage.py startapp web
+
+insdie there is a folder mgirating which we put for organistation
