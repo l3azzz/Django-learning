@@ -1,13 +1,36 @@
-To Create An App
-for cleaner coding a app is ineeded 
-
-
-got ot - cd Learning\django.1\src\django_1\src\django_1 eg
-
-create a app web named app  -- python manage.py startapp web
-
-insdie there is a folder mgirating which we put for organistation
-
-
-
 # What is an app
+	
+	first terminal - for running server
+	second terminal - for extra command - must activate virtual env
+
+	app is a set of login -1. a customer page 2.product page like 	that ...
+	so to fix that we use folder to organise for that we need -app
+
+	To Create An App
+	for cleaner coding a app is ineeded 
+
+	go to  - cd Learning\django.1\src\django_1\src\django_1 :-example
+
+	create a app web named app  -- python manage.py startapp web
+	insdie there is a folder mgirating which we put for organistation
+	now there are two app django_1 and web
+
+
+
+# WRITING VIEW FUNCTION
+
+	VIEW.PY -  function are only on view then we import it 
+	now we move urls.py > index func -> view.py
+
+from web.views import index means web folder then view then import index function
+
+we need to also import to work on other files
+
+
+# Connecting url 
+	in urls.py url pattern move to to web create file urls.py ther put 	the func
+	now we moved all things to urls.py in web now we have to reconnect 	so 
+
+
+	
+So BASICS NOW WE COVERED

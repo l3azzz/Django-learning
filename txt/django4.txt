@@ -1,0 +1,20 @@
+!!!!!!Working With WEB Pages!!!!!!
+
+
+# Loading HTML Template
+
+	we have to run html page but how 
+	se create a folder templatest in child root
+
+	and on {mnproject} > setting > TEMPLATEST = [.. DIRS: "templates"]
+	we do this to say that our templates are on templates folder
+
+	on templates i create index.html inside doc blah blha..
+	now on view.py we list that rizz up skibdi
+to do inside that func | return render(request,"index.html")
+as we already defined where templates are we don't have to defin like that **
+it worked now css F*** right naah we're gonna rizz up that shit later
+
+
+
+# Loading Image
