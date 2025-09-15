@@ -18,3 +18,45 @@ it worked now css F*** right naah we're gonna rizz up that shit later
 
 
 # Loading Image
+
+ 	in Django must verify ..trib..staticfile are in installed apps > 	setting.py
+
+	on below STATIC_URL ='/static/' means http://127.0.0.1:8000/ = 	js/img/more..
+	to add img go to index.html then on head tag add {% load statiac %}
+
+to write jango code in html we use {%%}
+
+	img src tag = <img src="{% static 'images/image.png' %}" />
+
+if ur asking ? to put img on child root add folder static/images/ paste your imgse
+
+still it won't work why we didn't define where static files are located so
+on setting.py bottom add STATICFILES_DIRS = [BASE_DIR / "static"]
+the static folder should be in same as manage.py 's place
+
+now if you want to put css or js or anything just put it in static and call this way
+
+
+
+
+
+
+# Loading CSS AND JS
+
+
+	TO DO THHAT on static folder create js and css oflder on there ptu ur files
+	bu ton href {% static 'css/style.css' % } same for css and js
+	
+
+
+# Setup Multiple Pages
+	waht if multiple pages
+		on 
+		create about.html in templates
+		django_1 > urls.py urlpattern > add path
+		web > url.py add path
+		then view.py > add func
+		
+		u must import also
+		
+	
