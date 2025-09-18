@@ -1,4 +1,151 @@
-!!!!!!Working With WEB Pages!!!!!!
+
+### Loading HTML Templates
+
+	1.  **Create Folder:** In the project root, create a folder named `templates`.
+	2.  **Configure Settings:** In `settings.py`, modify the `TEMPLATES` setting:
+  	  `'DIRS': [BASE_DIR / 'templates']`
+	3.  **Create View:** In your app's `views.py`, return the template:
+   	 `return render(request, "index.html")`
+
+
+
+
+### Loading Static Files (CSS, JS, Images)
+
+	1.  **Create Folder:** In the project root, create a folder named `static`. Place `css`, `js`, and `images` folders inside it.
+	2.  **Configure Settings:** In `settings.py`, add:
+  	  `STATICFILES_DIRS = [BASE_DIR / "static"]`
+	3.  **Load in Template:** At the top of your HTML file, add:
+	    `{% load static %}`
+	4.  **Link Files:**
+ 	   -   CSS: `<link rel="stylesheet" href="{% static 'css/style.css' %}">`
+ 	   -   JS: `<script src="{% static 'js/script.js' %}"></script>`
+ 	   -   Image: `<img src="{% static 'images/image.png' %}">`
+
+
+
+
+### Setting Up and Linking Multiple Pages
+
+	1.  **Create New View:** In `views.py`, add a function for the new page:
+  	  `def about(request): return render(request, "about.html")`
+	2.  **Configure App URLs:** In your app's `urls.py` (e.g., `web/urls.py`):
+ 	   `app_name = "web"`
+ 	   `path("about/", views.about, name="about")`
+	3.  **Include App URLs in Project:** In your main project's `urls.py`:
+ 	   `path("", include("web.urls", namespace="web"))`
+	4.  **Link in Template:** In your HTML, use the URL name:
+  	  `<a href="{% url 'web:about' %}">About</a>`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------HUMAN -VERSION --------
+
+
+
+
+
+!!!!!Working With WEB Pages!!!!!!
 
 
 # Loading HTML Template
@@ -58,5 +205,31 @@ now if you want to put css or js or anything just put it in static and call this
 		then view.py > add func
 		
 		u must import also
+
+
+
+# Linking Pages With URL
+
+		in Django we can add url normally but when url changes we f*** so
 		
+	SOOOOO
+		
+	project.urls > path("",include("web.urls",namespace="web")) namespace u should put that as second.apps.name 
+	web.urls >  path("about", about,name="about")  and we set there names name = url.function
+		web < about.url
+	<a href="{% url ' web:about'%}">About</a>
+
+	in web.url > urls.py > and must define app name using          app_name = "web"
 	
+
+
+
+
+
+
+
+
+
+
+
+

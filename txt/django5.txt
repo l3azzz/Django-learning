@@ -1,0 +1,172 @@
+### Passing Data to a Specific Template
+To pass data from your view to a single template, you use a context dictionary.
+
+1.  **In `views.py`:** Inside your view function, create the data and a dictionary named `context` to hold it.
+    ```
+    def index(request):
+        name = "Basith"
+        context = {"name": name}
+        return render(request, "index.html", context)
+    ```
+2.  **In `index.html`:** Access the data using double curly braces `{{ }}`.
+    ```
+    <h1>Hello, {{ name }}</h1>
+    ```
+
+### Passing Data Globally to All Templates
+To make data available in all templates without repeating code, use a context processor.
+
+1.  **Create Context Processor File:** In your app folder (e.g., `web`), create a new file named `context_processors.py`.
+2.  **Define the Context Function:** In `context_processors.py`, create a function that returns a dictionary of the data you want to be globally available.
+    ```
+    def main_context(request):
+        context = {
+            "title": "DEMO"
+        }
+        return context
+    ```
+3.  **Register the App:** Make sure your app is registered in `settings.py`.
+    ```
+    INSTALLED_APPS = [
+        # ... other apps
+        'web',
+    ]
+    ```
+4.  **Register the Context Processor:** In `settings.py`, find the `TEMPLATES` setting and add your context processor to the `'context_processors'` list.
+    ```
+    TEMPLATES = [
+        {
+            # ... other settings
+            'OPTIONS': {
+                'context_processors': [
+                    # ... other processors
+                    'web.context_processors.main_context', # Add this line
+                ],
+            },
+        },
+    ]
+    ```
+    Now, the `{{ title }}` variable will be available in every template across your project.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+human version
+
+
+# PASSING DATA TO THE TEMPLATE
+ - Topic-2
+
+
+
+
+	* Passing Data To Template
+
+		if we get a data in a var how to pass to index.html h1 tag?
+		
+	to add a var and a dictionary and returning the variable's value
+view.py > def.index.func > `name = "Basith"
+view.py > def.index.func > create dictionary context = {"name" : name}
+view.py > def.index.func > on return add , context=context
+
+		these are the thing to do
+		to import in html
+html <h1> Hello {{name}}</h1>
+
+
+	* Passing Data Globally
+
+	what if i wanna pass data to all pages?
+	we have to repeat right!            NO!
+
+solution == Global Variable
+
+web > *newFile* context_processers.py >  
+
+  	 def main_context(request): 
+  	   context = {
+		"title" : "DEMO"
+	   } 
+   	   return context
+setting.py > TEMPLATES > context_processors > 'web.context_processers.main_context'
+setting.py > INSTALLED_APPS = [	'web' ] ----register new app
