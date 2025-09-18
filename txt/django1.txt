@@ -70,22 +70,24 @@ else
 ---------------------Mandatory-Thing---------------------------------
 
 setting.py > TEMPLATES > 'DIRS': ["templates"],
+
 urls.py-main > urlpatterns > path("",include("web.urls",namespace="web"))
              >       above > from django.urls import path,include
+
 urls.py-web  > copy everything from urls.py-main to urls.py-web and remove
                import of admin and clear everything in urlpatterns func
-             > import index func from view.py and urlpatterns > path("",index,name="index")
+             > import index func from view.py  from .views import index
+               and urlpatterns > path("",index,name="index")
              > on top --- app_name = "web" 
+
 view.py > def index(request):
           return render ( request,"index.html")  -creating index func
 
- 
+====================================================================
 
 setting.py    > INSTALLED_APPS > confirm if djan..ib..staticfiles is there
        bottom > STATIC_URL = '/static'
                 STATICFILES_DIRS = [ BASE_DIR / "static"]
-
-
 
 any html.doc > head tag > {% load static %}
 to link css or js > href="{%  static  'link-to-css'  %}"
