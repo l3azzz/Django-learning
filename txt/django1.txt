@@ -3,10 +3,10 @@
 
 * create folder {your project name}         - mkdir {project-name}
 * go inside your root project               - cd {project-name}
-* create folder "src"                       - mkdir src
-* go to src folder                          - cd src
 * create virtual environment                - python -m venv venv
 * Activate virtual enviornement             - venv\Scripts\activate.bat
+* create folder "src"                       - mkdir src
+* go to src folder                          - cd src
 * install Django                            - pip install Django
 * create a app -main                        - django-admin startproject {project-name}
 * go to app -main                           - cd {project-name}
@@ -33,7 +33,6 @@
 
 myproject/
 └── src/
-    ├── venv/
     ├── myproject/
     │   ├── __init__.py
     │   ├── settings.py
@@ -48,11 +47,13 @@ myproject/
     │   ├── apps.py
     │   ├── models.py
     │   ├── tests.py
-    │   └── views.py
-    │
+    │   ├── views.py
+    │   └── urls.py
+    |
     ├── static/
     ├── templates/
     └── manage.py
+└───venv/
 
     ------------------STRUCTURE---------
 
