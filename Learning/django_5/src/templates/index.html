@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ project_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <style>
+      /* fallback if css missing */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚀 {{ project_name }} is Live!</h1>
+      <p>
+        Your Django project with <strong>{{ app_name }}</strong> app is running
+        successfully.
+      </p>
+      <div class="status">✅ Project Status: Ready</div>
+    </div>
+  </body>
+</html>
