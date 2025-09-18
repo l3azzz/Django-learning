@@ -1,3 +1,90 @@
+
+
+
+
+
+
+
+
+
+
+		Simple Way -to create Django app
+
+
+* create folder {your project name}              - mkdir {project-name}
+* go inside your root project                    - cd {project-name}
+* create folder "src"                            - mkdir src
+* go to src folder                               - cd src
+* create virtual environment                     - python -m venv venv
+* Activate virtual enviornement                  - venv\Scripts\activate.bat
+* install Django                                 - pip install Django
+* create a app -main                             - django-admin startproject {project-name}
+* go to app -main                                - cd {project-name}
+* create a app web -secondary                    - python manage.py startapp web
+
+* create template folder                         - mkdir templates
+* create static folder                           - mkdir static
+
+
+
+
+STRUCTURE
+
+
+myproject/
+└── src/
+    ├── venv/
+    ├── myproject/
+    │   ├── __init__.py
+    │   ├── settings.py
+    │   ├── urls.py
+    │   ├── wsgi.py
+    │   └── asgi.py
+    │
+    ├── web/
+    │   ├── migrations/
+    │   ├── __init__.py
+    │   ├── admin.py
+    │   ├── apps.py
+    │   ├── models.py
+    │   ├── tests.py
+    │   └── views.py
+    │
+    ├── static/
+    ├── templates/
+    └── manage.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 +-------------------------------------------------------------------+
 |                                                                   |
 |                   An Introduction to Django                       |
