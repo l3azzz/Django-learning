@@ -1,8 +1,458 @@
-# CREATE SPACE WEBSITE
-  -topic-3
+Create A Dynamic Website
+
+HOW TO LOGIN TO ADMIN ? wtf
 
 
-	* START PROJECT
 
 
-we use early space website
+
+
+
+# introduction 
+		copy his assets and make the website work
+		and do ur job don't judge on others
+
+
+
+# Connecting to DATA Base
+
+					ui = interface
+					database = storing data backend means user data and more
+
+			for communicating between them we use django
+				for this we go to adming panel by /admin
+					to get there we need username and passwrod 
+
+
+				there's a small database running locally on our jango porject u know sqlite3
+
+				to go to admin panel we first need to create superuser
+				=> python manage.py createsuperuser  | this creates a superuser
+				=> this doesn't work unless it has database in db.sqlite3 file
+
+# Explaing ORM
+
+	WHAT IS IT?
+		django is written on python but database is written or used in sql
+		that means they communicate in different way to communicate btwn them
+						we use ORM  (object relation mapping) much more like a gtranslat
+
+      to use this we ened sqlite browser so why not get one
+
+      after installing open it and click open database and nav to ur proj db
+      when we click browser data it's empty right
+
+
+# Creating Table
+      @MIGRATION handles data changes
+      	to manage data's we use models.py in web folder
+      	when we write in this it convert's to database format
+
+
+# creating testimonial model   => models.py
+		we use classes
+
+					class Testimonial(models.Model):     --we inherit models
+							name = models.CharField(max_length=255)   -- max length value is must
+							designation =  models.CharField(max_length=255)   -- max length 
+						<- image  we will learn it later its tougt ->
+							description  =  models.TextField()   -- unlimited
+
+
+			text only = character field
+			numbers only = integer field
+			unlimited text = Text Field
+			.....
+
+			!!! must put ur app name 'web' on installed apps in setting.py
+
+
+
+			now we written how to verify to orm
+			to verify go to terminal => python manage.py makemigrations
+			after that it create a file in migrations
+
+			to move ito db => python manage.py migrate
+
+			now if i open db file it shows a list of idk
+			now we got table
+
+# Creating SUPERUSER 💪
+
+
+			ON ADMING PANEL to get there we need usrname and pswrd right!
+						 to get pwrd and usrname we need to run the below command
+						 										=> python manage.py createsuperuser
+						 													then it ask for usrnme and pwrs
+
+
+
+# Registering Testimonial To Admin Site
+					 u see on admin panel there is only one option to add a user only but no testimonial so 
+
+					 for that we use admin.py file
+
+					 first import the model
+					 then > admin.site.register(Testimonial)
+
+					 now if go to admin panel we can enter what we need and more now on my sql we can see register kunna
+
+					 				but for now it list as testimonial object (num.)
+
+
+# Display Name on Admin Site Using __Str__ method
+
+						to do that go to modes.py declear a func
+								def __str__(self):
+									return self.name
+
+							in this string can be only displayed 
+
+
+# Showing Datas On Admin List Page
+				
+				to add more details on that 
+
+				admin.py > class TestimonialAdmin(admin.ModelAdmin):
+												list_display = ["name", "description","designation"]
+
+
+												admin.site.register(Testimonial, TestimonialAdmin)
+
+
+
+# COLLECTING Testimonail data in views
+
+					now we have to display all testimonial added in html
+
+
+					to do that we need to extract data from sql db and put it in html
+					so view.py is the target then add 
+
+
+							from web.models import Testimonial
+
+
+					testimonials = Testimonial.object.all()means all in a list format
+					context = {
+							"testimonials": testimonials
+					}
+					return render(request, "index.html" context=context)
+
+
+
+
+							Remember that every class has a manager named objects
+
+							all instance created by the class is mnged by objects
+																manger = function
+
+							query set is a modified list
+
+
+
+# Showing Data in HTML page
+
+					to add python code on .html we use {%%}
+
+					right so 
+						{% for testimonial in testimonials %}
+
+						div
+									-~-~-~
+									<p> {{testimonial.description}} </p>
+						div
+
+						{% endfor %}  -msut be like this
+
+
+
+# Creating Promoter Model
+
+					creating a promoter model
+
+					<code>
+
+
+
+
+
+
+
+
+
+
+
+					while image looks like this
+
+					image = models.ImageField(upload_to="")
+					 // the location to upload the image 
+
+					  not this don't work if don't install pillow 
+					  pip install pillow  --python image library
+
+
+
+
+
+					  check another lesson also where we upload iamge !!!
+
+
+
+# Updating Media Settings
+
+
+
+											to upload user's images
+
+												setting.py > bottom > MEDIA_URL = "media/"
+																																		MEDIA_ROOT =  BASE_DIR / "media"
+
+												urls.py >  from django.conf import settings
+																							from django.conf.urls.static import static
+
+																							> urlpatterns > AFTER
+																									~~~ ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# Register Promoter Model In Admin 
+
+											
+										class PromoterAdmin(admin.ModelAdmin):
+    										list_display = ["id", "name", "image"]
+
+										admin.site.register(Promoter, PromoterAdmin)
+
+
+
+# Collecting Data iN Views
+
+
+				from web.models import Testimonials,  Promoter
+  				  promoters = Promoter.objects.all()
+ 			context = {
+       "promoter": promoters,
+    }
+
+
+
+    on html image tag src = " {{promoter.image.url}}"
+
+    user uploaded files are called media files
+
+
+
+# Register FAQ Model
+
+
+								Faq
+													a. Title - CharField
+													b. Description - TextField
+													c. faq_type - CharField - choices
+
+
+				1. models.py > 
+
+																												--options tuple in a tuple ----
+																			FAQ_TYPE = (
+																			    ( "rent_tracking", "Rent Trackcing")
+																			    ( "new_deposit", "New Deposit")
+																			    ( "existing_deposit", "Existing Deposit")
+																			            )
+
+																			            					--class model----
+																				class Faq (models.Model):
+																				    title = models.CharField(max_length=255)  
+																				    description = models.TextField()
+																				    faq_type = models.CharField(max_length=128, choices=)
+
+																				    def __str__(self):
+																				        return self.name
+
+
+
+# Registering FAQ on admin site
+
+
+																				class FaqAdmin(admin.ModelAdmin):
+  																							  list_display = ["id", "title", "faq_type","description"]
+																				admin.site.register(Faq, FaqAdmin)
+
+
+
+
+# Showing faq in .html template search
+					
+    faqs = Faq.objects.all()
+    ..
+    .
+
+
+      {% for faq in faqs %}
+
+                <li>
+                  <h4>{{faq.title}}</h4>
+                  <p>{{faq.description}}</p>
+                </li>
+
+                {% endfor %}
+
+
+
+
+                and we have to use filter in view.py
+
+# Adding Image field to Testimonial model
+
+		after adding image tag
+    image = models.ImageField(upload_to="testimonials/") 
+    it says that it can't be null if null it fucks
+
+
+
+    	so or ,default="default value" 
+    		or there are option 1 or 2. 2 is above
+
+
+
+#Subscribe model and Admin registration
+													
+													class Subscribe(models.Model):
+  														  email = models.EmailField()
+
+   												 def __str__(self):
+       													 return  self.email
+
+
+# Submit Subscribe Form
+
+				normally a form has POST and GET method
+
+				get = it is also dispalyed in the url it only send and get dat
+				post = secret sending just sending only
+
+
+				so ours is post method bcuz it's sending secret email!! Shh!
+
+				so index.html make i tpost add action {% url 'web:subscribe'%}
+				web.urls.py > path("subscribe", subscribe, name="subscribe" )
+				and also import subscribe file
+
+				add subscribe function
+
+				views.py > def subscribe(request):
+   										 pass
+
+   			now if we subscribe i needss csrf verification 
+   			so under form sarting tag add {% csrf_token %}
+
+   			now ta da !
+
+
+   			view.py >   
+   			def subscribe(request):
+  			   data = request.POST.get("email")
+   				 Subscribe.objects.create(
+       		 email = email
+  				 )
+    			 return HttpResponse("email")
+
+
+    remember to import also
+
+
+
+
+
+
+
+
+
+
+
+# Implementing redirect
+
+
+
+								return redirect("/") normal redirect and import
+								prob: this goes to homepage
+
+
+								to the previous page we use django.url reverse
+								return redirect(reverse("web:index"))
+
+								now to add custom alert msges
+
+								we want to install sweetalert2 plugin
+
+
+
+# Send data through ajax much more like axious
+
+								now problem it's just reloading WTF! expensive
+
+								ajax send through js and collects response
+
+
+
+
+								first opt we add class to form "ajax" for not ajax purposes but differnet purposes
+
+								to differntiate the forms tat has to be sented trhogh ajax
+
+
+
+								now on script.jx >>>
+
+
+										jquery ajax method
+												$(document).on("submit","form.ajax",function(e) {e.preventDefault}) 
+
+
+
+												id on;t know actually
+
+
+			jQuery.ajax({
+      type: method,
+      url: url,
+      dataType: "json",
+      data: new FormData(this),
+      processData: false,
+      contentType: false,
+      success: function (data) {},
+      error: function (error) {
+        console.log(error);
+      },
+    });
+
+
+
+#  JSON Response from subscribe view
+
+
+					IDK IDK IDK IDK IDK IDK IDK IDK IDK IDK IDK 
+
+
+
+# iMPLEMENTING sWEETLART pOPuP
+
+
+	pip install sweetalert2
+	npm install sweetalert2
+
+
+	actually idk
+
+
+
+# PREVENTING DUPLICATE ENTYR
+
+			 i DON'T HAVE A BASE
+
+
+
+
+
+# cLEARING INPPUT AFTER SUCCESFUL SUBMISSION
+
