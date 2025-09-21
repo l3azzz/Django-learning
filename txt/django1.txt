@@ -81,12 +81,16 @@ urls.py-web  > copy everything from urls.py-main to urls.py-web and remove
              > on top --- app_name = "web" 
 
 view.py > def index(request):
-          return render ( request,"index.html")  -creating index func
+          
+             return render ( request, "index.html") -creating index func
+            create html doc
+
+
 
 ====================================================================
 
 setting.py    > INSTALLED_APPS > confirm if djan..ib..staticfiles is there
-       bottom > STATIC_URL = '/static'
+       bottom > STATIC_URL = 'static/'
                 STATICFILES_DIRS = [ BASE_DIR / "static"]
 
 any html.doc > head tag > {% load static %}

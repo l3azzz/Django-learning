@@ -1,0 +1,230 @@
+DJANGO MODELS
+
+
+
+# OPTIONAL FIELDS
+
+
+            what is models ?
+
+
+
+            hwo to add optional field
+
+            	text = models.TextField(blank=true, null=True) 
+            	-- optional someitme sblank or anything
+            	empty field may have unbold texts
+
+
+
+
+# Passing Default value to a field
+
+
+		passing default values to a field
+
+				text = textfield(max_length=255, default="hello")
+
+				sets default value hello
+
+
+
+
+# Unique Values
+
+
+				one's field must be unique 
+
+
+				text = textfield(unique=True)			
+				--again same works then doesn't allow
+
+
+				if early data is dupe then hold ur ass
+
+
+
+# Explaining Primary Key
+
+
+	What the fuck is primary key
+		A: primary key is ID if true it means it has a solid id
+
+
+		hwo to make elm primary
+
+
+		ala =  adlald(unique=true, primary_key=true)
+
+		both of them must be present!!!!!!!!!!	
+
+
+
+
+# Explaining pk
+
+			 primary key setted things we call PK (pishku kumar)
+
+			 if primary key true then we call that thing pk
+
+
+
+# Number Fields
+
+			what is num field
+
+			number = numberonly
+
+
+			id = models.AutoField()
+			id = models.BigAutoField()
+			id = models.integerField()
+			id = models.BigintegerField()
+			id = models.floatfield()
+			id = models.decimalField()
+			id = models.BooleanField(default=True or null=true)
+			id = models.DateField()
+			id = models.DateTimeField()
+			id = models.TimeField
+			id = models.FileField(upload_to="WTF Location")
+			id = models.UUIDField(primary_key=true, 	
+				 default=uuid.uuid4)  -- in this import uuid
+
+
+			UUID = UNIVERSALLY UNIQUE IDENTIFIERS
+			it is the most secure way default=uuid.uuid4
+			with datefield we can save urrent data and more
+			if we need current time without entering
+			---auto_now_add = True
+			boolean means true or false if none the pass nul=tru
+			wehn writing boolean add "is" before the teh var nam
+			big means so much
+			float means decimel num
+			decimal values we can set dec places, max digits
+
+
+
+
+
+
+			===========TOUGH=================
+
+
+
+# ForeignKey Relation
+
+tata > 	car1	mx11,m288
+		car2	mr88, y13
+		car3	lk89Y, 28M
+
+
+	Name 		Color 		Manufacturer
+   	------------------------------------
+	mx11		White		Tata
+	lk89Y 		Red			Tata
+
+
+
+	⬆️ with above it is easyer to understand ⬆️
+
+	class Car(models.Model):
+		name = models.Charfield(maxlength=128)
+		color = models.Charfield(maxlength=128)
+		mnfctr = models.Charfield(maxlength=128)
+
+	-------above-isn't-a-efficient-way-----------
+
+
+		we can't put Charfield for mnfctur bcuz peoples may 
+		type in caps lowercase and more so tht'isnt'efficient
+
+
+		----INSTEAD----
+
+
+		mnfctr  	color	car
+		------------------------
+		Tata		____	____
+		Audi 		____ 	____
+		Benz		____	____
+
+
+		above is preloaded list we can select and enter it
+		so it's a dependent thing 2 models needed
+
+
+
+				class Car(models.Model):
+					name = models.Charfield(maxlength=128)
+					color = models.Charfield(maxlength=128)
+					mnfctr = models.ForeignKey("web.Mnfctr",on_delete=models.CASCADE)  
+							--what this means
+								when that one deletes the other thing also have to be deleted
+
+				class Mnfctr(models.Model):
+				name = models.CharField(ma_length=128)
+
+
+
+
+				now ewe have to first set the manufacturer 
+				after
+				we can set model car and more
+
+
+
+# ONE to ONE reaLATIONship
+
+
+			UNDERSTAND ABOVE FIRST
+
+
+				we want one car for one manufacture
+				not many just one
+
+					for that we use onetone
+
+					instead of foreginKey we use 
+
+					OneToOneField("web.Mnfctr", on_delete=models.CaSCADE)
+
+
+
+# Many To Many Relation
+
+		to add multiple options liek foregin key is single
+		but to add multiple things
+		we use 
+		MnayTOmanyField("web.studgroup")
+
+		studgroup
+			ald= adf;a
+			adfa=a da;d
+			adfadf= adfadf
+			  multiple things
+
+
+
+# Meta Class for passing Aditional Opions
+
+
+
+		now subclass means a class in a class in a.....
+
+		class ONE(models.Model):
+			d = d
+			a = a
+			e = e
+			v = y
+
+			class Meta: --for passing adittional data
+
+				-- like database name, id and more
+
+				db_table = "web_student"  --table name
+				ordering = ["id"]    -- order it by the id
+											-- u can add multiple things
+											-- and add minus to reverse
+				verbose_name = "dumb"  -- chn name in admin panel
+				verbose_name_plural =  "dumbs"  -- if plural then 
+															  this only shows
