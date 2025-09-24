@@ -16,6 +16,7 @@
                            Folder on src - cd src
 * create template folder                         - mkdir templates
 * create static folder                           - mkdir static
+# create media folder                            - mkdir media
 
                             Files
 * web > *urls.py                                 - make a file urls.py
@@ -26,6 +27,9 @@
 # Start It _ src > {project-name} >- python manage.py runserver  
 # if you wish to have more folder 
 # add folders |  html.doc | on static |images, javascript, css, font|
+
+# python manage.py createsuperuser
+
 ------------------------------------------------------------------------
 
 
@@ -53,6 +57,7 @@ myproject/
     ├── static/
     ├── templates/
     └── manage.py
+     -- media/
 └───venv/
 
     ------------------STRUCTURE---------
@@ -101,7 +106,19 @@ to link css or js > href="{%  static  'link-to-css'  %}"
 
 setting.py > INSATLLED_APPS > 'web',         MUST
 
+             MEDIA_URL = '/media/'
+             MEDIA_ROOT = BASE_DIR / 'media'
+
 ---------------------------------------------------------------------
+
+migration and super user
+
+    set up: python manage.py makemigrations
+    do up : python manage.py migrate
+
+    user : python manage.py createsuperuser
+
+
 
 
 ------------ACTUAL-WAY-------------ADVANCED--------------------------

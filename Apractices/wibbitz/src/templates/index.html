@@ -1,22 +1,37 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Wibbitz: Online video creation made easy</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <link rel="stylesheet" href="css/fontello.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/style.css' %}"
+      type="text/css"
+    />
 
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/fontello.css' %}"
+      type="text/css"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'images/favicon.png' %}"
+    />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:image" content="" />
+    <meta property="og:image" content="{% static 'images/home-hero.svg' %}" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
   </head>
   <body>
     <header>
       <h1 class="left">
-        <a href="#"><img src="images/logo.svg" alt="Logo" /></a>
+        <a href="#"><img src="{% static 'images/logo.svg' %}" alt="Logo" /></a>
       </h1>
       <nav class="middle">
         <ul>
@@ -43,17 +58,28 @@
             Wibbitz gives you the freedom to create short form video online in
             minutes – no experience necessary.
           </p>
-          <form action="">
-            <input type="email" placeholder="Enter your work email" />
-            <button type="submit">Get a Demo</button>
+          <form
+            id="demo-request-form"
+            method="post"
+            action="/api/demo-request/"
+          >
+            {% csrf_token %}
+            <input
+              id="demo-email"
+              name="email"
+              type="email"
+              placeholder="Enter your work email"
+              required
+            />
+            <button id="demo-submit" type="submit">Get a Demo</button>
           </form>
         </section>
         <div class="right_container">
           <div class="img_container">
-            <img src="images/home-hero.svg" alt="" />
+            <img src="{% static 'images/home-hero.svg' %}" alt="" />
           </div>
           <a href="#" class="play-button">
-            <img src="images/play.svg" alt="" />
+            <img src="{% static 'images/play.svg' %}" alt="" />
           </a>
         </div>
       </section>
@@ -62,126 +88,47 @@
       <section class="wrapper">
         <p>Trusted by content creators across the world</p>
         <ul>
+          {% for customers in customers %}
           <li>
-            <a href="#"><img src="images/logo-reuters.svg" alt="" /></a>
+            <a href="#"
+              ><img
+                style="height: 70px"
+                class="firslogo"
+                src="{{  customers.image.url }}"
+                alt="{{ customers.name}}"
+            /></a>
           </li>
-          <li>
-            <a href="#"><img src="images/logo-taboola.svg" alt="" /></a>
-          </li>
-          <li>
-            <a href="#"><img src="images/logo-bloomberg.svg" alt="" /></a>
-          </li>
-          <li>
-            <a href="#"><img src="images/logo-nbc.svg" alt="" /></a>
-          </li>
-          <li>
-            <a href="#"><img src="images/logo-birchbox.svg" alt="" /></a>
-          </li>
-          <li>
-            <a href="#"><img src="images/USA-Today-logo_24.svg" alt="" /></a>
-          </li>
-          <li>
-            <a href="#"><img src="images/logo-hubspot.svg" alt="" /></a>
-          </li>
-          <li>
-            <a href="#"><img src="images/logo-tmz.svg" alt="" /></a>
-          </li>
+          {% endfor %}
         </ul>
       </section>
     </section>
     <section id="fearures">
+      {% for feature in features %}
       <section class="feature">
         <section class="wrapper flex-wrapper">
           <div class="img_container">
-            <img src="images/HS.png" alt="" />
+            <img src="{{ feature.image.url }}" alt="" />
           </div>
           <div class="content">
-            <div class="icon"><img src="images/edit-white.svg" alt="" /></div>
-            <h3>Match everything to your brand and style</h3>
-            <p>
-              Add logo watermarks, custom video intros, text overlay styles, a
-              full-spectrum color palette, and upload your brand fonts.
-            </p>
+            <div class="icon" style="background: {{ feature.icon_background }}">
+              <img src="{{ feature.icon.url}}" alt="" />
+            </div>
+            <h3>{{ feature.title}}</h3>
+            <p>{{ feature.description}}</p>
             <a href="#" class="button">Get a Demo</a>
             <div class="review">
               <hr class="dash" />
-              <blockquote>
-                "Being able to crank out videos consistently, localize them for
-                different regions, and still save resources, time, and energy
-                has been a game changer."
-              </blockquote>
+              <blockquote>{{feature.testimonial_description}}</blockquote>
               <span
-                ><small>Charlie Reiff,</small> Social Video Editor &
-                Animator</span
+                ><small>{{feature.testimonial_author}},</small>
+                {{feature.author_designation}}</span
               >
-              <img src="images/logo-hubspot.svg" alt="" />
+              <img src="{{ feature.testimonial_logo.url }}" alt="" />
             </div>
           </div>
         </section>
       </section>
-      <section class="feature">
-        <section class="wrapper flex-wrapper">
-          <div class="img_container">
-            <img src="images/HS.png" alt="" />
-          </div>
-          <div class="content">
-            <div class="icon" style="background: #ffc837">
-              <img src="images/lightning-white.svg" alt="" />
-            </div>
-            <h3>Match everything to your brand and style</h3>
-            <p>
-              Add logo watermarks, custom video intros, text overlay styles, a
-              full-spectrum color palette, and upload your brand fonts.
-            </p>
-            <a href="#" class="button">Get a Demo</a>
-            <div class="review">
-              <hr class="dash" />
-              <blockquote>
-                "Being able to crank out videos consistently, localize them for
-                different regions, and still save resources, time, and energy
-                has been a game changer."
-              </blockquote>
-              <span
-                ><small>Charlie Reiff,</small> Social Video Editor &
-                Animator</span
-              >
-              <img src="images/USA-Today-logo_24.svg" alt="" />
-            </div>
-          </div>
-        </section>
-      </section>
-      <section class="feature">
-        <section class="wrapper flex-wrapper">
-          <div class="img_container">
-            <img src="images/HS.png" alt="" />
-          </div>
-          <div class="content">
-            <div class="icon" style="background: #3cd278">
-              <img src="images/film-white.svg" alt="" />
-            </div>
-            <h3>Speed up video production time</h3>
-            <p>
-              React to breaking news and trending topics on every platform with
-              one-click resizing to landscape, square, and vertical format.
-            </p>
-            <a href="#" class="button">Get a Demo</a>
-            <div class="review">
-              <hr class="dash" />
-              <blockquote>
-                "Wibbitz allows us to quickly create templates to share similar
-                videos across multiple sites. A team of three people created
-                videos analyzing several hundred NFL draft picks in just a few
-                hours."
-              </blockquote>
-              <span
-                ><small>Chris Pirrone,</small> General Manager, Sports Media
-                Group</span
-              >
-              <img src="images/IHMe55.svg" alt="" />
-            </div>
-          </div>
-        </section>
-      </section>
+      {% endfor %}
     </section>
     <section id="reviews">
       <section class="wrapper">
@@ -190,45 +137,19 @@
         </section>
         <section class="bottom">
           <ul>
+            {% for reviews in reviews %}
             <li>
               <div class="top">
                 <span class="play">
-                  <img src="images/play.svg" alt="" />
+                  <img src="{% static 'images/play.svg'  %}" alt="" />
                 </span>
                 <div class="logo">
-                  <img src="images/logo-brand-nbc2.svg" alt="" />
+                  <img src="{{ reviews.testimonial_logo.url }}" alt="" />
                 </div>
               </div>
-              <h4>
-                How NBC enhances their content offering with custom video
-                automation
-              </h4>
+              <h4>{{ reviews.title }}</h4>
             </li>
-            <li>
-              <div class="top">
-                <span class="play">
-                  <img src="images/play.svg" alt="" />
-                </span>
-                <div class="logo">
-                  <img src="images/hubspot-1.svg" alt="" />
-                </div>
-              </div>
-              <h4>How HubSpot showcases business trends through video</h4>
-            </li>
-            <li>
-              <div class="top">
-                <span class="play">
-                  <img src="images/play.svg" alt="" />
-                </span>
-                <div class="logo">
-                  <img src="images/HousingWi.svg" alt="" />
-                </div>
-              </div>
-              <h4>
-                How HousingWire uses Wibbitz to highlight housing market and
-                real estate news
-              </h4>
-            </li>
+            {% endfor %}
           </ul>
         </section>
       </section>
@@ -236,50 +157,22 @@
     <section id="testimonials">
       <section class="wrapper">
         <ul>
+          {% for testimonial in testimonials %}
           <li>
             <div class="top">
-              <img
-                src="images/Chase-Kroll-920x760normal-1.png"
-                alt=""
-                class="cover"
-              />
+              <img src="{{ testimonial.image.url }}" alt="" class="cover" />
               <div class="logo">
-                <img src="images/Hogan_Lovells_logo_white_bg2.svg" alt="" />
+                <img src="{{ testimonial.testimonial_logo.url }}" alt="" />
               </div>
             </div>
             <div class="bottom">
-              <blockquote>
-                The versatility of Wibbitz allows us to create video for any
-                kind of digital content—making our team more efficient while
-                scaling production.
-              </blockquote>
-              <h6>Chase Kroll</h6>
-              <span>Managing Director</span>
-              <small>Strategic Communications</small>
+              <blockquote>{{ testimonial.title }}</blockquote>
+              <h6>{{ testimonial.testimonial_name }}</h6>
+              <span>{{ testimonial.author_job }}</span>
+              <small> {{testimonial.author_designation }} </small>
             </div>
           </li>
-          <li>
-            <div class="top">
-              <img
-                src="images/Ken-Gibs-920x760normal-1.png"
-                alt=""
-                class="cover"
-              />
-              <div class="logo">
-                <img src="images/BET_logo_black.svg" alt="" />
-              </div>
-            </div>
-            <div class="bottom">
-              <blockquote>
-                The videos we can quickly create with Wibbitz help us engage our
-                audiences on social media, who feel more connected to videos
-                than just an image or text post.
-              </blockquote>
-              <h6>Ken Gibbs</h6>
-              <span>Vice President</span>
-              <small>Digital Video & Social Content</small>
-            </div>
-          </li>
+          {% endfor %}
         </ul>
       </section>
     </section>
@@ -290,88 +183,24 @@
         </section>
         <section class="content">
           <ul>
+            {% for midfeature in midfeatures %}
             <li>
               <div class="content">
                 <a href="#" class="img_container"
-                  ><img src="images/usecase-illustration-marketing.svg" alt=""
+                  ><img src="{{ midfeature.image.url }}" alt=""
                 /></a>
-                <h3><a href="#">Marketing</a></h3>
-                <p>
-                  Promote your blog posts, case studies, and product
-                  announcements with branded videos.
-                </p>
-                <a href="#" class="button">Learn More</a>
+                <h3><a href="#">{{midfeature.title}}</a></h3>
+                <p>{{midfeature.description}}</p>
+                <a href="{{ midfeature.link}}" class="button">Learn More</a>
               </div>
             </li>
-            <li>
-              <div class="content">
-                <a href="#" class="img_container"
-                  ><img src="images/usecase-illustration-marketing.svg" alt=""
-                /></a>
-                <h3><a href="#">Marketing</a></h3>
-                <p>
-                  Promote your blog posts, case studies, and product
-                  announcements with branded videos.
-                </p>
-                <a href="#" class="button">Learn More</a>
-              </div>
-            </li>
-            <li>
-              <div class="content">
-                <a href="#" class="img_container"
-                  ><img src="images/usecase-illustration-marketing.svg" alt=""
-                /></a>
-                <h3><a href="#">Marketing</a></h3>
-                <p>
-                  Promote your blog posts, case studies, and product
-                  announcements with branded videos.
-                </p>
-                <a href="#" class="button">Learn More</a>
-              </div>
-            </li>
-            <li>
-              <div class="content">
-                <a href="#" class="img_container"
-                  ><img src="images/usecase-illustration-marketing.svg" alt=""
-                /></a>
-                <h3><a href="#">Marketing</a></h3>
-                <p>
-                  Promote your blog posts, case studies, and product
-                  announcements with branded videos.
-                </p>
-                <a href="#" class="button">Learn More</a>
-              </div>
-            </li>
-            <li>
-              <div class="content">
-                <a href="#" class="img_container"
-                  ><img src="images/usecase-illustration-marketing.svg" alt=""
-                /></a>
-                <h3><a href="#">Marketing</a></h3>
-                <p>
-                  Promote your blog posts, case studies, and product
-                  announcements with branded videos.
-                </p>
-                <a href="#" class="button">Learn More</a>
-              </div>
-            </li>
-            <li>
-              <div class="content">
-                <a href="#" class="img_container"
-                  ><img src="images/usecase-illustration-marketing.svg" alt=""
-                /></a>
-                <h3><a href="#">Marketing</a></h3>
-                <p>
-                  Promote your blog posts, case studies, and product
-                  announcements with branded videos.
-                </p>
-                <a href="#" class="button">Learn More</a>
-              </div>
-            </li>
+            {% endfor %}
           </ul>
         </section>
         <section class="bottom">
-          <span class="icon"><img src="images/star.svg" alt="" /></span>
+          <span class="icon"
+            ><img src="{% static 'images/star.svg' %}" alt=""
+          /></span>
           <div class="element">
             <p>
               Empower your whole team to create an engaging video in 7 minutes
@@ -390,48 +219,19 @@
           </h3>
         </section>
         <ul>
-          <li class="one">
+          {% for product in products %}
+          <li class="one" style="background: {{product.bg_color}};">
             <div class="logo">
-              <img src="images/Studio-icon2.svg" alt="" />
+              <img src="{{ product.logo.url }}" alt="" />
             </div>
-            <h1>Studio</h1>
-            <p>
-              Create professional short form video with the online video editor
-              that anyone can master.
-            </p>
+            <h1>{{ product.title }}</h1>
+            <p>{{ product.description }}</p>
             <a href="#" class="button">Learn More</a>
             <div class="img_bottom">
-              <img src="images/studio-card.png" alt="" class="hero" />
+              <img src="{{ product.image.url }}" alt="" class="hero" />
             </div>
           </li>
-          <li class="two">
-            <div class="logo">
-              <img src="images/Lightbox-icon2.svg" alt="" />
-            </div>
-            <h1>Lightbox</h1>
-            <p>
-              Engage your website or app users with a built-in custom video
-              creation interface.
-            </p>
-            <a href="#" class="button">Learn More</a>
-            <div class="img_bottom">
-              <img src="images/lightbox-card.png" alt="" class="hero" />
-            </div>
-          </li>
-          <li class="three">
-            <div class="logo">
-              <img src="images/Wavi-icon2.svg" alt="" />
-            </div>
-            <h1>Wavi</h1>
-            <p>
-              Scale video by automatically producing from text content or data
-              with our API.
-            </p>
-            <a href="#" class="button">Learn More</a>
-            <div class="img_bottom">
-              <img src="images/wavi-card.png" alt="" class="hero" />
-            </div>
-          </li>
+          {% endfor %}
         </ul>
       </section>
     </section>
@@ -443,36 +243,16 @@
           </h3>
         </section>
         <ul>
+          {% for blog in blog %}
           <li>
-            <img src="images/Blog-video-attention-span-2.jpg" alt="" />
-            <span style="color: #0055fb" class="label">Blog Post</span>
-            <h2>
-              6 best video practices for capturing audiences’ 8-second attention
-              span
-            </h2>
-            <a href="#" class="button">Read blog</a>
+            <img src="{{ blog.image.url }}" alt="" />
+            <span class="label">{{ blog.blog_type }}</span>
+            <h2>{{ blog.title }}</h2>
+            <a href="{{ blog.link}}" class="button">
+              Go To {{ blog.blog_type }}</a
+            >
           </li>
-          <li>
-            <img src="images/Webinar-Ceros-Thumbnail.jpg" alt="" />
-            <span class="label">Webinar</span>
-            <h2>
-              Wibbitz + Ceros: Improving content marketing through visual
-              storytelling
-            </h2>
-            <a href="#" class="button">Watch webina</a>
-          </li>
-          <li>
-            <img
-              src="images/2019-Q3-Instagram-Report-EN-Thumbnail.png"
-              alt=""
-            />
-            <span class="label">Report</span>
-            <h2>
-              Explore Instagram Video: How to convert, engage, and get more
-              Instagram followers with video
-            </h2>
-            <a href="#" class="button">Get the report</a>
-          </li>
+          {% endfor %}
         </ul>
         <div class="bottom">
           <a href="#" class="button">Explore All Resources</a>
@@ -506,20 +286,31 @@
             </div>
             <ul class="people">
               <li class="active">
-                <img src="images/profile1.jpg" alt="" />
+                <img src="{% static 'images/profile1.jpg' %}" alt="" />
               </li>
-              <li><img src="images/profile2.jpg" alt="" /></li>
-              <li><img src="images/profile3.jpg" alt="" /></li>
-              <li><img src="images/profile4.jpg" alt="" /></li>
+              <li><img src="{% static 'images/profile2.jpg' %}" alt="" /></li>
+              <li><img src="{% static 'images/profile3.jpg' %}" alt="" /></li>
+              <li><img src="{% static 'images/profile4.jpg' %}" alt="" /></li>
             </ul>
           </div>
           <hr class="line bottom" />
           <div class="companies">
             <ul>
-              <li><img src="images/att_white_L.svg" alt="" /></li>
-              <li><img src="images/bertelsmann_white_L.svg" alt="" /></li>
-              <li><img src="images/bloomberg_white_L.svg" alt="" /></li>
-              <li><img src="images/hubspot_white_L.svg" alt="" /></li>
+              <li>
+                <img src="{% static 'images/att_white_L.svg' %}" alt="" />
+              </li>
+              <li>
+                <img
+                  src="{% static 'images/bertelsmann_white_L.svg' %}"
+                  alt=""
+                />
+              </li>
+              <li>
+                <img src="{% static 'images/bloomberg_white_L.svg' %}" alt="" />
+              </li>
+              <li>
+                <img src="{% static 'images/hubspot_white_L.svg' %}" alt="" />
+              </li>
             </ul>
           </div>
         </div>
@@ -604,19 +395,29 @@
             <div class="social">
               <ul>
                 <li>
-                  <a href=""><img src="images/facebook-blue.svg" alt="" /></a>
+                  <a href=""
+                    ><img src="{% static 'images/facebook-blue.svg' %}" alt=""
+                  /></a>
                 </li>
                 <li>
-                  <a href=""><img src="images/twitter-blue.svg" alt="" /></a>
+                  <a href=""
+                    ><img src="{% static 'images/twitter-blue.svg' %}" alt=""
+                  /></a>
                 </li>
                 <li>
-                  <a href=""><img src="images/linkedin-blue.svg" alt="" /></a>
+                  <a href=""
+                    ><img src="{% static 'images/linkedin-blue.svg' %}" alt=""
+                  /></a>
                 </li>
                 <li>
-                  <a href=""><img src="images/youtube-blue.svg" alt="" /></a>
+                  <a href=""
+                    ><img src="{% static 'images/youtube-blue.svg' %}" alt=""
+                  /></a>
                 </li>
                 <li>
-                  <a href=""><img src="images/instagram.svg" alt="" /></a>
+                  <a href=""
+                    ><img src="{% static 'images/instagram.svg' %}" alt=""
+                  /></a>
                 </li>
               </ul>
             </div>
@@ -626,21 +427,25 @@
             <ul>
               <li>
                 <a href="#"
-                  ><img src="images/Studio-icon.svg" alt="" /><span
-                    >Studio</span
-                  ></a
+                  ><img
+                    src="{% static 'images/Studio-icon.svg' %}"
+                    alt=""
+                  /><span>Studio</span></a
                 >
               </li>
               <li>
                 <a href="#"
-                  ><img src="images/Lightbox-icon.svg" alt="" /><span
-                    >Lightbox</span
-                  ></a
+                  ><img
+                    src="{% static 'images/Lightbox-icon.svg' %}"
+                    alt=""
+                  /><span>Lightbox</span></a
                 >
               </li>
               <li>
                 <a href="#"
-                  ><img src="images/Wavi-icon.svg" alt="" /><span>Wavi</span></a
+                  ><img src="{% static 'images/Wavi-icon.svg' %}" alt="" /><span
+                    >Wavi</span
+                  ></a
                 >
               </li>
             </ul>
@@ -681,7 +486,7 @@
         </section>
         <section class="bottom">
           <div class="title">
-            <img src="images/globe-gray.svg" alt="" />
+            <img src="{% static 'images/globe-gray.svg' %}" alt="" />
             <span>Choose language</span>
           </div>
           <div class="bottom">
@@ -694,8 +499,8 @@
       </section>
     </footer>
 
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/sweetalert2.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/sweetalert2.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
   </body>
 </html>
