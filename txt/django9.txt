@@ -1,0 +1,25 @@
+# CONNECTING POSTGRE SQL IN WINDOWS
+
+
+
+	DOWLLOAD from postgresql.org/downloa
+
+
+		and download ur fav
+		- install it
+		- untick stackbuilder
+		- add password for superuser
+
+	to open it search "pga"
+		- enter the super user password
+		- left side servers > postgresql 10 
+		- on databases > create database
+		- enter the data in that
+
+	adding to our backend project 
+
+	-- to add to backend proj
+
+		setting.py > DATABASES > name : 'name of the database'
+								 passwrod : superuser passwrd
+								 port : default port when insled
