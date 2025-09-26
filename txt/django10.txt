@@ -1,0 +1,112 @@
+ IMPLEMENTING DETAIL PAGES 
+
+
+> INTRODUCTION TO DETAIL PAGE
+
+	WE KNOW MULTIPLE PAGES BUT WHAT ABOUT SINGLE PAGES
+
+
+
+	looks like we have both header on both html
+	not necessery to have on both pages
+	have to be on all pages
+
+	:)
+
+	so create a template base.html
+		and paste everything that is common
+
+		and where the content should be displayed
+		we call it special = {% block content %} 
+								-- u can name content ur fav name
+		and it with special = {% endblock %} 
+
+
+
+	nwo to use it what the fuck!
+
+		on that page we re going to do
+		remove everything that is common in base.html even html body tag and more all except the content that are not common and current
+
+		then which content should be displayed on {%blockcontent%}
+			so
+		{% extends "base.html" %}
+		{% load static %}
+
+			{% block content %}
+
+				--uncommon contents i mean all---
+
+			{% endblock %}
+
+
+
+
+> Changing Model fields
+
+
+    
+class Products(models.Model):
+    
+    logo = models.FileField(upload_to="products/logo")
+    title = models.CharField(max_length=128)
+    main_title = models.CharField(max_length=128)
+    description = models.TextField()
+    main_description = models.TextField()
+    image = models.ImageField(upload_to="products/image")
+    hero_image = models.ImageField(upload_to="products/hero_image")
+    bg_color = models.CharField(max_length=128)
+
+    class Meta:
+        db_table = "web_products"
+        ordering = ['id']
+    
+    
+  
+
+> Connecting Product Url
+
+		now it goes to a single product
+		for now when we click learn more button it has to send custom url for each buttons
+
+		in href : {% url 'web:product' %}  -- now when we click to goes to the web > product page
+		but it's not enough we have to go to dfrent products
+		so
+		we have to add ID
+
+
+>  Connecting single Page
+
+		to pass id we use an argument 
+
+		href > {% url 'web:product' pk=product.pk %}  - run error
+		urls.py > web > urlpatterns  > product path
+				"product/<pk>/"  for var we use <>
+
+		view.py > product > (request,pk) > {} <
+			product = Product.object.get(pk=pk)  -if get didn't function server down !
+
+
+			products = Products.objects.all()
+			main_product = Products.objects.get(pk=pk)
+			context = {
+				"products": products,
+				"main_product": main_product,
+			}
+			return render(request, 'product.html', context=context)
+
+				don't add in loop if it is extendds from base.html
+
+> Resolving 500 Errors
+
+		what if it has alsdfja char insterad of num
+		so <int:pk>
+		what if num but invalid
+		so so add filter in view.py
+
+		so product = get_object_or_404(producct.object.filter(pk=pk))
+
+
+
+> Listing customer of each product
+		blah blh blah

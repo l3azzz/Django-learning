@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import index
+from . import views
 
 app_name = 'web'
-
 urlpatterns = [
-    path('', index, name='index'),
+    path('', views.index, name='index'),
+    path('api/demo-request/', views.demo_request_api, name='demo_request_api'),
+    path('product/<int:pk>/', views.product, name='product'),
 ]

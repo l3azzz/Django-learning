@@ -811,6 +811,15 @@ After project setup and server run:
 "Do you want to create a superuser now? (yes/no)"  
 - If YES: run `python manage.py createsuperuser` (with alternatives like `py manage.py createsuperuser`)  
 - If NO: skip this step
+3 . Ask user:
+
+    create a template file base.html
+    if yes then create base .html file if no then skip it
+
+4. Ask user 
+    
+
+
 
 
 ------------------------------------------------------------------------

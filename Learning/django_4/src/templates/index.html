@@ -1,13 +1,329 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>MyProject Home</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-  </head>
-  <body>
-    <h1>Welcome to MyProject</h1>
-    <p>If you see this page, Django templates are wired correctly.</p>
-  </body>
-</html>
+{% extends "base.html" %} {% load static %} {% block content %}
+<section id="spotlight">
+  <section class="wrapper flex-wrapper">
+    <section class="content">
+      <h1>The quickest and easiest online video editor for every team</h1>
+      <p>
+        Wibbitz gives you the freedom to create short form video online in
+        minutes – no experience necessary.
+      </p>
+      <form id="demo-request-form" method="post" action="/api/demo-request/">
+        {% csrf_token %}
+        <input
+          id="demo-email"
+          name="email"
+          type="email"
+          placeholder="Enter your work email"
+          required
+        />
+        <button id="demo-submit" type="submit">Get a Demo</button>
+      </form>
+    </section>
+    <div class="right_container">
+      <div class="img_container">
+        <img src="{% static 'images/home-hero.svg' %}" alt="" />
+      </div>
+      <a href="#" class="play-button">
+        <img src="{% static 'images/play.svg' %}" alt="" />
+      </a>
+    </div>
+  </section>
+</section>
+<section id="brands">
+  <section class="wrapper">
+    <p>Trusted by content creators across the world</p>
+    <ul>
+      {% for customers in customers %}
+      <li>
+        <a href="#"
+          ><img
+            style="height: 70px"
+            class="firslogo"
+            src="{{  customers.image.url }}"
+            alt="{{ customers.name}}"
+        /></a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</section>
+<section id="fearures">
+  {% for feature in features %}
+  <section class="feature">
+    <section class="wrapper flex-wrapper">
+      <div class="img_container">
+        <img src="{{ feature.image.url }}" alt="" />
+      </div>
+      <div class="content">
+        <div class="icon" style="background: {{ feature.icon_background }}">
+          <img src="{{ feature.icon.url}}" alt="" />
+        </div>
+        <h3>{{ feature.title}}</h3>
+        <p>{{ feature.description}}</p>
+        <a href="#" class="button">Get a Demo</a>
+        <div class="review">
+          <hr class="dash" />
+          <blockquote>{{feature.testimonial_description}}</blockquote>
+          <span
+            ><small>{{feature.testimonial_author}},</small>
+            {{feature.author_designation}}</span
+          >
+          <img src="{{ feature.testimonial_logo.url }}" alt="" />
+        </div>
+      </div>
+    </section>
+  </section>
+  {% endfor %}
+</section>
+<section id="reviews">
+  <section class="wrapper">
+    <section class="top">
+      <h3>Create video like these leading brands</h3>
+    </section>
+    <section class="bottom">
+      <ul>
+        {% for reviews in reviews %}
+        <li>
+          <div class="top">
+            <span class="play">
+              <img src="{% static 'images/play.svg'  %}" alt="" />
+            </span>
+            <div class="logo">
+              <img src="{{ reviews.testimonial_logo.url }}" alt="" />
+            </div>
+          </div>
+          <h4>{{ reviews.title }}</h4>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </section>
+</section>
+<section id="testimonials">
+  <section class="wrapper">
+    <ul>
+      {% for testimonial in testimonials %}
+      <li>
+        <div class="top">
+          <img src="{{ testimonial.image.url }}" alt="" class="cover" />
+          <div class="logo">
+            <img src="{{ testimonial.testimonial_logo.url }}" alt="" />
+          </div>
+        </div>
+        <div class="bottom">
+          <blockquote>{{ testimonial.title }}</blockquote>
+          <h6>{{ testimonial.testimonial_name }}</h6>
+          <span>{{ testimonial.author_job }}</span>
+          <small> {{testimonial.author_designation }} </small>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</section>
+<section id="features">
+  <section class="wrapper">
+    <section class="top">
+      <h3>Wibbitz gives every team the freedom to create</h3>
+    </section>
+    <section class="content">
+      <ul>
+        {% for midfeature in midfeatures %}
+        <li>
+          <div class="content">
+            <a href="#" class="img_container"
+              ><img src="{{ midfeature.image.url }}" alt=""
+            /></a>
+            <h3><a href="#">{{midfeature.title}}</a></h3>
+            <p>{{midfeature.description}}</p>
+            <a href="{{ midfeature.link}}" class="button">Learn More</a>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="bottom">
+      <span class="icon"
+        ><img src="{% static 'images/star.svg' %}" alt=""
+      /></span>
+      <div class="element">
+        <p>
+          Empower your whole team to create an engaging video in 7 minutes or
+          less.
+        </p>
+        <a href="#" class="button">Get a Demo</a>
+      </div>
+    </section>
+  </section>
+</section>
+<section id="products">
+  <section class="wrapper">
+    <section class="top">
+      <h3>Our three video solutions are built for every type of business</h3>
+    </section>
+    <ul>
+      {% for product in products %}
+      <li class="one" style="background: {{product.bg_color}};">
+        <div class="logo">
+          <img src="{{ product.logo.url }}" alt="" />
+        </div>
+        <h1>{{ product.title }}</h1>
+        <p>{{ product.description }}</p>
+        <a href="{% url 'web:product' pk=product.pk %}" class="button"
+          >Learn More</a
+        >
+        <div class="img_bottom">
+          <img src="{{ product.image.url }}" alt="" class="hero" />
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</section>
+<section id="blog">
+  <section class="wrapper">
+    <section class="top">
+      <h3>
+        Video resources: Insider advice on how to bring your content to life
+      </h3>
+    </section>
+    <ul>
+      {% for blog in blog %}
+      <li>
+        <img src="{{ blog.image.url }}" alt="" />
+        <span class="label">{{ blog.blog_type }}</span>
+        <h2>{{ blog.title }}</h2>
+        <a href="{{ blog.link}}" class="button"> Go To {{ blog.blog_type }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="bottom">
+      <a href="#" class="button">Explore All Resources</a>
+    </div>
+  </section>
+</section>
+<section id="contact">
+  <section class="wrapper">
+    <div class="left">
+      <h3>Ready to get started?</h3>
+      <p>
+        Schedule a demo of our online video editor to start making your own
+        short form videos today. We’ll help you elevate your video content
+        strategy.
+      </p>
+
+      <hr class="line" />
+
+      <div class="testimonials">
+        <h5>Why do content creators choose Wibbitz?</h5>
+        <div class="content">
+          <blockquote>
+            "Wibbitz strengthens the communications strategy at our company by
+            allowing us to produce more videos, faster, while maintaining top
+            level of quality."
+          </blockquote>
+          <h6>Jeff Cucinell</h6>
+          <span class="role"> Director of Social Strategy, iHeartRadio</span>
+        </div>
+        <ul class="people">
+          <li class="active">
+            <img src="{% static 'images/profile1.jpg' %}" alt="" />
+          </li>
+          <li><img src="{% static 'images/profile2.jpg' %}" alt="" /></li>
+          <li><img src="{% static 'images/profile3.jpg' %}" alt="" /></li>
+          <li><img src="{% static 'images/profile4.jpg' %}" alt="" /></li>
+        </ul>
+      </div>
+      <hr class="line bottom" />
+      <div class="companies">
+        <ul>
+          <li>
+            <img src="{% static 'images/att_white_L.svg' %}" alt="" />
+          </li>
+          <li>
+            <img src="{% static 'images/bertelsmann_white_L.svg' %}" alt="" />
+          </li>
+          <li>
+            <img src="{% static 'images/bloomberg_white_L.svg' %}" alt="" />
+          </li>
+          <li>
+            <img src="{% static 'images/hubspot_white_L.svg' %}" alt="" />
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="right">
+      <div class="content">
+        <h4>Help us get to know you.</h4>
+        <form action="">
+          <div class="one_by_two">
+            <input type="email" placeholder="Work Email" />
+          </div>
+          <div class="one_by_two">
+            <input type="text" placeholder="First Name" />
+          </div>
+          <div class="one_by_two">
+            <input type="text" placeholder="Last Name" />
+          </div>
+          <div class="one_by_two">
+            <input type="text" placeholder="Company" />
+          </div>
+          <div class="one_by_two">
+            <select>
+              <option value="">Company Size</option>
+              <option value="1-10">1-10</option>
+              <option value="11-50">11-50</option>
+              <option value="51-200">51-200</option>
+              <option value="201-500">201-500</option>
+            </select>
+          </div>
+          <div class="one_by_two">
+            <select>
+              <option value="">Industry</option>
+              <option value="Agriculture">Agriculture</option>
+              <option value="Banking &amp; Finance">
+                Banking &amp; Finance
+              </option>
+              <option value="Business Services &amp; Software">
+                Business Services &amp; Software
+              </option>
+            </select>
+          </div>
+          <div class="one_by_two">
+            <select>
+              <option value="">Job Role</option>
+              <option value="C-Suite">C-Suite</option>
+              <option value="VP">VP</option>
+            </select>
+          </div>
+          <div class="one_by_two">
+            <select>
+              <option value="">Country</option>
+              <option value="United States">United States</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Albania">Albania</option>
+              <option value="Algeria">Algeria</option>
+              <option value="American Samoa">American Samoa</option>
+            </select>
+          </div>
+          <div class="full checkbox">
+            <input id="id_checkbox" type="checkbox" value="Get a Demo" />
+            <label for="id_checkbox"
+              >Yes, I'd like to receive occasional marketing emails from
+              Wibbitz. I have the right to opt out at any time.
+              <a href="#">View privacy policy.</a></label
+            >
+          </div>
+          <div class="full">
+            <input class="submit" type="submit" value="Get a Demo" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</section>
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'js/sweetalert2.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
